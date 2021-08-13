@@ -20,7 +20,7 @@
     "babel-plugin-styled-components": "^1.10.7",
     "babel-preset-env": "^1.6.1",
     "gh-pages": "^2.2.0",
-    "next": "^9.2.2",
+    "next": "^11.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
