@@ -1,0 +1,26 @@
+---
+interface Props {
+  url: string;
+  title: string;
+  pubDate: string;
+  tags?: string[];
+}
+
+const { url, title, pubDate, tags } = Astro.props;
+---
+
+<article>
+  <a href={url}><h1>{title}</h1></a>
+  <time datetime={pubDate}>{pubDate}</time>
+  {
+    tags && (
+      <ul>
+        {tags.map((tag) => (
+          <li>
+            <a href={`/tags/${tag}`}>{tag}</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</article>

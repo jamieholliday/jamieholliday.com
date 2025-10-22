@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/BlogPost.astro";
+
+interface MarkdownInstance {
+  url: string;
+  frontmatter: {
+    title: string;
+    pubDate: string;
+    tags: string[];
+  };
+}
+
+const allPosts = Object.values(
+  import.meta.glob<MarkdownInstance>("./posts/*.md", { eager: true }),
+);
+---
+
+<BaseLayout pageTitle="Blog">
+  <h1>Blog</h1>
+  <ul>
+    {
+      allPosts.map((post) => (
+        <BlogPost
+          url={post.url}
+          title={post.frontmatter.title}
+          pubDate={post.frontmatter.pubDate}
+          tags={post.frontmatter.tags}
+        />
+      ))
+    }
+  </ul>
+</BaseLayout>

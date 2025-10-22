@@ -1,0 +1,22 @@
+---
+import Navigation from "./Navigation.astro";
+import Logo from "./Logo.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+---
+
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1rem;
+  }
+</style>
+
+<header>
+  <a aria-label="Homepage" href="/" class="logo-link">
+    <Logo />
+  </a>
+  <Navigation />
+  <ThemeSwitcher />
+</header>

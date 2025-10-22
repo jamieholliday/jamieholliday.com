@@ -1,0 +1,11 @@
+{
+  "plugins": ["prettier-plugin-astro", "@prettier/plugin-oxc"],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ]
+}
