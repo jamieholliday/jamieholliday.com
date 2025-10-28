@@ -1,44 +1,150 @@
+---
+import SunIcon from "./SunIcon.astro";
+import MoonIcon from "./MoonIcon.astro";
+---
+
 <style>
-  div {
-    display: flex;
-    gap: 0.5rem;
+  .theme-switcher {
+    position: relative;
   }
 
-  button {
-    padding: 0.5rem 1rem;
-    border: none;
-    background-color: var(--button-bg, #eee);
-    color: var(--button-text, #000);
+  #theme-toggle {
+    appearance: none;
+    width: 56px;
+    height: 28px;
+    background-color: light-dark(var(--pixel-indigo), var(--pixel-navy));
+    border: 2px solid light-dark(var(--pixel-navy), var(--pixel-cream));
+    box-shadow: 3px 3px 0px 0px
+      light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.15));
+    position: relative;
     cursor: pointer;
-    border-radius: 4px;
-    font-size: 1rem;
+    transition: background-color 0.3s ease;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      background-color: light-dark(var(--pixel-cream), var(--pixel-cream));
+      border: 2px solid light-dark(var(--pixel-navy), var(--pixel-navy));
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      transition: transform 0.3s ease;
+    }
+
+    &:checked {
+      background-color: light-dark(var(--pixel-purple), var(--pixel-teal));
+    }
+
+    &:checked:after {
+      transform: translateX(26px);
+    }
+
+    &:hover {
+      box-shadow: 4px 4px 0px 0px
+        light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.2));
+    }
   }
 
-  button:hover {
-    background-color: var(--button-bg-hover, #ddd);
+  .theme-switcher {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .theme-switcher.ready {
+    opacity: 1;
+  }
+
+  .icon {
+    position: absolute;
+    pointer-events: none;
+    transition:
+      all 0.3s ease,
+      opacity 0.3s ease;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sun-icon {
+    width: 16px;
+    height: 16px;
+    color: light-dark(var(--pixel-navy), var(--pixel-navy));
+    left: 6px;
+    top: 6px;
+    opacity: 0;
+  }
+
+  .moon-icon {
+    width: 14px;
+    height: 14px;
+    color: light-dark(var(--pixel-cream), var(--pixel-cream));
+    right: 7px;
+    top: 7px;
+    opacity: 1;
+  }
+
+  #theme-toggle:checked ~ .sun-icon {
+    opacity: 1;
+  }
+
+  #theme-toggle:checked ~ .moon-icon {
+    opacity: 0;
   }
 </style>
 
 <script>
-  const buttonGroup = document.querySelector("#theme-switcher");
-  const htmlElement = document.documentElement;
-  if (buttonGroup) {
-    buttonGroup.addEventListener("click", (event: Event) => {
-      const target = event.target as HTMLButtonElement;
-      if (target && target.dataset.value) {
-        htmlElement.style.colorScheme = target.dataset.value;
-        const buttons = buttonGroup.querySelectorAll("button");
-        buttons.forEach((button) => {
-          button.setAttribute("aria-pressed", "false");
-        });
-        target.setAttribute("aria-pressed", "true");
+  const toggle = document.getElementById(
+    "theme-toggle",
+  ) as HTMLInputElement | null;
+  const themeSwitcher = document.querySelector(".theme-switcher");
+
+  if (toggle && themeSwitcher) {
+    const storedTheme = window.sessionStorage.getItem("theme");
+    if (storedTheme === "dark") {
+      toggle.checked = true;
+      document.documentElement.style.colorScheme = "dark";
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else if (storedTheme === "light") {
+      toggle.checked = false;
+      document.documentElement.style.colorScheme = "light";
+      document.documentElement.setAttribute("data-theme", "light");
+    } else if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      toggle.checked = true;
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    themeSwitcher.classList.add("ready");
+
+    toggle.addEventListener("change", (event: Event) => {
+      const isChecked = (event.target as HTMLInputElement).checked;
+      if (isChecked) {
+        document.documentElement.style.colorScheme = "dark";
+        document.documentElement.setAttribute("data-theme", "dark");
+        window.sessionStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.style.colorScheme = "light";
+        document.documentElement.setAttribute("data-theme", "light");
+        window.sessionStorage.setItem("theme", "light");
       }
     });
   }
 </script>
 
-<div role="group" aria-label="Theme Switcher" id="theme-switcher">
-  <button aria-pressed="false" data-value="light">Light</button>
-  <button aria-pressed="false" data-value="light dark">Auto</button>
-  <button aria-pressed="false" data-value="dark">Dark</button>
+<div class="theme-switcher" title="Theme Toggle">
+  <label for="theme-toggle" class="sr-only">Theme toggle</label>
+  <input type="checkbox" id="theme-toggle" />
+  <span class="icon sun-icon" aria-hidden="true">
+    <SunIcon />
+  </span>
+  <span class="icon moon-icon" aria-hidden="true">
+    <MoonIcon />
+  </span>
 </div>

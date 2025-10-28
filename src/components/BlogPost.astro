@@ -1,26 +1,59 @@
 ---
+import Tag from "./Tag.astro";
+import PostMeta from "./PostMeta.astro";
+
 interface Props {
   url: string;
   title: string;
   pubDate: string;
   tags?: string[];
+  description?: string;
 }
 
-const { url, title, pubDate, tags } = Astro.props;
+const { url, title, pubDate, tags, description } = Astro.props;
 ---
 
-<article>
-  <a href={url}><h1>{title}</h1></a>
-  <time datetime={pubDate}>{pubDate}</time>
-  {
-    tags && (
-      <ul>
-        {tags.map((tag) => (
-          <li>
-            <a href={`/tags/${tag}`}>{tag}</a>
-          </li>
-        ))}
-      </ul>
-    )
+<style>
+  .blog-post-wrapper {
+    margin-block-end: 3rem;
   }
-</article>
+
+  article {
+    padding: 1.5rem;
+    margin-block-end: 1.5rem;
+  }
+
+  article h3 {
+    margin-block-end: 0.5rem;
+  }
+
+  .description {
+    margin-block: 1rem;
+    color: light-dark(var(--text-color-light), var(--text-color-dark));
+  }
+
+  .tags {
+    display: inline-flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+</style>
+
+<div class="blog-post-wrapper">
+  <article class="card">
+    <h2><a href={url}>{title}</a></h2>
+    <p class="description">{description}</p>
+    <PostMeta pubDate={pubDate} />
+    {
+      tags && (
+        <div class="tags">
+          {tags.map((tag) => (
+            <Tag tag={tag} />
+          ))}
+        </div>
+      )
+    }
+  </article>
+
+  <p><a class="button" href={url}>Read more...</a></p>
+</div>

@@ -6,6 +6,7 @@
       "dependencies": {
         "@astrojs/check": "^0.9.5",
         "astro": "^5.14.6",
+        "p-try": "^3.0.0",
         "prettier": "^3.6.2",
         "prettier-plugin-astro": "^0.14.1",
         "typescript": "^5.9.3",
@@ -782,6 +783,8 @@
     "p-queue": ["p-queue@8.1.1", "", { "dependencies": { "eventemitter3": "^5.0.1", "p-timeout": "^6.1.2" } }, "sha512-aNZ+VfjobsWryoiPnEApGGmf5WmNsCo9xu8dfaYamG5qaLP7ClhLN6NgsFe6SwJ2UbLEBK5dv9x8Mn5+RVhMWQ=="],
 
     "p-timeout": ["p-timeout@6.1.4", "", {}, "sha512-MyIV3ZA/PmyBN/ud8vV9XzwTrNtR4jFrObymZYnZqMmW0zA8Z17vnT0rBgFE/TlohB+YCHqXMgZzb3Csp49vqg=="],
+
+    "p-try": ["p-try@3.0.0", "", {}, "sha512-nD1xrH3cV2epQsO8pv6p28i/TdrzJQ5g73c41a+fu+3uhABdf7xujY58ebIuSrOQYxNb8WqNDpX6HjYl8P0KfQ=="],
 
     "package-manager-detector": ["package-manager-detector@1.4.1", "", {}, "sha512-dSMiVLBEA4XaNJ0PRb4N5cV/SEP4BWrWZKBmfF+OUm2pQTiZ6DDkKeWaltwu3JRhLoy59ayIkJ00cx9K9CaYTg=="],
 

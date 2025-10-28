@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import Tag from "../components/Tag.astro";
+import PostMeta from "../components/PostMeta.astro";
 
 interface Props {
   frontmatter: {
@@ -13,17 +15,49 @@ interface Props {
 const { frontmatter } = Astro.props;
 ---
 
+<style>
+  .post-meta {
+    margin-block-end: 2rem;
+    padding-block-end: 1.5rem;
+    border-bottom: 2px solid light-dark(var(--pixel-navy), var(--pixel-cream));
+  }
+  
+  .tags-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin-block-start: 1rem;
+  }
+  
+  .tags-list li {
+    margin: 0;
+  }
+  
+
+  .post-content {
+    line-height: 1.7;
+  }
+</style>
+
 <BaseLayout pageTitle={frontmatter.title}>
-  <h1>{frontmatter.title}</h1>
-  <p>Written by {frontmatter.author} on {frontmatter.pubDate}</p>
-  <ul>
-    {
-      frontmatter.tags.map((tag) => (
-        <li>
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </li>
-      ))
-    }
-    <slot />
-  </ul>
+  <article>
+    <h1>{frontmatter.title}</h1>
+    <div class="post-meta">
+      <PostMeta pubDate={frontmatter.pubDate} />
+      <ul class="tags-list">
+        {
+          frontmatter.tags.map((tag) => (
+            <li>
+              <Tag tag={tag} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="post-content">
+      <slot />
+    </div>
+  </article>
 </BaseLayout>

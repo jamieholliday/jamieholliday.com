@@ -1,0 +1,17 @@
+---
+interface Props {
+  pubDate: string;
+}
+
+const { pubDate } = Astro.props;
+const formattedDate = new Date(pubDate).toLocaleDateString("en-GB", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const date = new Date(pubDate).toLocaleDateString("en-GB");
+---
+
+<p>
+  <strong>Last updated:</strong> <time datetime={date}>{formattedDate}</time>
+</p>

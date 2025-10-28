@@ -9,6 +9,7 @@ image:
     alt: 'The Astro logo on a dark background with a pink glow.'
 tags: ["astro", "blogging", "learning in public"]
 ---
+
 Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
 
 ## What I've accomplished
@@ -21,4 +22,12 @@ Welcome to my _new blog_ about learning Astro! Here, I will share my learning jo
 
 ## What's next
 
-I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+I will finish `some inline code` the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+
+```js
+const myVar = "something"
+
+function test() {
+    return ['thing', 2, false]
+}
+```

@@ -9,7 +9,28 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-block: 1rem;
+    padding-block: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (width >= var(--breakpoint-tablet)) {
+    header {
+      padding-block: 1.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  @media (width >= var(--breakpoint-tablet)) {
+    .header-right {
+      gap: 1.5rem;
+    }
   }
 </style>
 
@@ -17,6 +38,8 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
   <a aria-label="Homepage" href="/" class="logo-link">
     <Logo />
   </a>
-  <Navigation />
-  <ThemeSwitcher />
+  <div class="header-right">
+    <Navigation />
+    <ThemeSwitcher />
+  </div>
 </header>

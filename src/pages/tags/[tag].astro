@@ -8,6 +8,7 @@ interface MarkdownInstance {
     title: string;
     pubDate: string;
     tags: string[];
+    description: string;
   };
 }
 
@@ -39,8 +40,18 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout pageTitle={tag}>
-  <p>Posts tagged with {tag}</p>
-  <ul>
-    {posts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} pubDate={post.frontmatter.pubDate} />)}
-  </ul>
+  <h1>Posts tagged with: <span class="highlight">{tag}</span></h1>
+  <div>
+    {
+      posts.map((post) => (
+        <BlogPost
+          url={post.url}
+          title={post.frontmatter.title}
+          pubDate={post.frontmatter.pubDate}
+          tags={post.frontmatter.tags}
+          description={post.frontmatter.description}
+        />
+      ))
+    }
+  </div>
 </BaseLayout>
