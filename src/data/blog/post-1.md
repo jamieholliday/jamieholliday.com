@@ -1,12 +1,7 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
-title: 'My First Blog Post'
+title: "My First Blog Post"
 pubDate: 2022-07-01
-description: 'This is the first post of my new Astro blog.'
-author: 'Astro Learner'
-image:
-    url: 'https://docs.astro.build/assets/rose.webp'
-    alt: 'The Astro logo on a dark background with a pink glow.'
+description: "This is the first post of my new Astro blog."
 tags: ["astro", "blogging", "learning in public"]
 ---
 
@@ -25,9 +20,9 @@ Welcome to my _new blog_ about learning Astro! Here, I will share my learning jo
 I will finish `some inline code` the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
 
 ```js
-const myVar = "something"
+const myVar = "something";
 
 function test() {
-    return ['thing', 2, false]
+  return ["thing", 2, false];
 }
 ```

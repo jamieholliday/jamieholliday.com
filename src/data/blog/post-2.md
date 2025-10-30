@@ -1,12 +1,7 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: "Building a Pixel Perfect Design System"
 pubDate: 2024-01-15
 description: "How I created a retro 8-bit design system with modern accessibility standards."
-author: "Astro Learner"
-image:
-  url: "https://docs.astro.build/assets/rose.webp"
-  alt: "Colorful pixel art design."
 tags: ["design", "css", "accessibility"]
 ---
 

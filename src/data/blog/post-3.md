@@ -1,12 +1,7 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: "CSS Light-Dark Function is Amazing"
 pubDate: 2024-02-20
 description: "Why the light-dark() CSS function changed how I build themes."
-author: "Astro Learner"
-image:
-  url: "https://docs.astro.build/assets/rose.webp"
-  alt: "Light and dark mode toggle."
 tags: ["css", "theming", "web development"]
 ---
 

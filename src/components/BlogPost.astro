@@ -3,14 +3,14 @@ import Tag from "./Tag.astro";
 import PostMeta from "./PostMeta.astro";
 
 interface Props {
-  url: string;
+  id: string;
   title: string;
-  pubDate: string;
+  pubDate: Date;
   tags?: string[];
   description?: string;
 }
 
-const { url, title, pubDate, tags, description } = Astro.props;
+const { id, title, pubDate, tags, description } = Astro.props;
 ---
 
 <style>
@@ -41,7 +41,7 @@ const { url, title, pubDate, tags, description } = Astro.props;
 
 <div class="blog-post-wrapper">
   <article class="card">
-    <h2><a href={url}>{title}</a></h2>
+    <h2><a href={`posts/${id}`}>{title}</a></h2>
     <p class="description">{description}</p>
     <PostMeta pubDate={pubDate} />
     {
@@ -55,5 +55,5 @@ const { url, title, pubDate, tags, description } = Astro.props;
     }
   </article>
 
-  <p><a class="button" href={url}>Read more...</a></p>
+  <p><a class="button" href={`posts/${id}`}>Read more...</a></p>
 </div>
