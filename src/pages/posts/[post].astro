@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tag from "../../components/Tag.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({
+    params: { post: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<style>
+  .tags {
+    margin-block-end: 2rem;
+  }
+</style>
+
+<BaseLayout pageTitle="Home">
+  <h1>{post.data.title}</h1>
+  <ul class="tags">
+    {
+      post.data.tags.map((tag) => (
+        <li>
+          <Tag tag={tag} />
+        </li>
+      ))
+    }
+  </ul>
+  <Content />
+</BaseLayout>

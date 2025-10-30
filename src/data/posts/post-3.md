@@ -2,7 +2,7 @@
 title: "CSS Light-Dark Function is Amazing"
 pubDate: 2024-02-20
 description: "Why the light-dark() CSS function changed how I build themes."
-tags: ["css", "theming", "web development"]
+tags: ["css", "theming", "web development", "astro"]
 ---
 
 The new `light-dark()` CSS function is a game changer for theming. Here's why I love it.

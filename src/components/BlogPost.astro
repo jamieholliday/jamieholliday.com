@@ -5,7 +5,7 @@ import PostMeta from "./PostMeta.astro";
 interface Props {
   id: string;
   title: string;
-  pubDate: Date;
+  pubDate: string;
   tags?: string[];
   description?: string;
 }
@@ -31,29 +31,25 @@ const { id, title, pubDate, tags, description } = Astro.props;
     margin-block: 1rem;
     color: light-dark(var(--text-color-light), var(--text-color-dark));
   }
-
-  .tags {
-    display: inline-flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
 </style>
 
 <div class="blog-post-wrapper">
   <article class="card">
-    <h2><a href={`posts/${id}`}>{title}</a></h2>
+    <h2><a href={`/posts/${id}`}>{title}</a></h2>
     <p class="description">{description}</p>
     <PostMeta pubDate={pubDate} />
     {
       tags && (
-        <div class="tags">
+        <ul class="tags">
           {tags.map((tag) => (
-            <Tag tag={tag} />
+            <li>
+              <Tag tag={tag} />{" "}
+            </li>
           ))}
-        </div>
+        </ul>
       )
     }
   </article>
 
-  <p><a class="button" href={`posts/${id}`}>Read more...</a></p>
+  <p><a class="button" href={`/posts/${id}`}>Read more...</a></p>
 </div>

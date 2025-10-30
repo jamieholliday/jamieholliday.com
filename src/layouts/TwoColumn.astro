@@ -1,14 +1,33 @@
 ---
 import { getCollection } from "astro:content";
-import TwoColumn from "../layouts/TwoColumn.astro";
-import BlogPost from "../components/BlogPost.astro";
-import Tag from "../components/Tag.astro";
-
+import BaseLayout from "../layouts/BaseLayout.astro";
 const allPosts = await getCollection("posts");
 const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+import Tag from "../components/Tag.astro";
 ---
 
 <style>
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  @media (width >= 768px) {
+    .wrapper {
+      flex-direction: row;
+      gap: 3rem;
+      align-items: flex-start;
+    }
+
+    .left {
+      flex: 3;
+    }
+
+    .right {
+      flex: 1;
+    }
+  }
   .tags {
     list-style: none;
     padding: 0;
@@ -18,22 +37,10 @@ const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
     flex-wrap: wrap;
   }
 </style>
-
-<TwoColumn pageTitle="Home">
+<BaseLayout {...Astro.props}>
   <div class="wrapper">
     <div class="left">
-      <h1>Latest Articles and tutorials</h1>
-      {
-        allPosts.map((post) => (
-          <BlogPost
-            id={post.id}
-            title={post.data.title}
-            pubDate={post.data.pubDate.toString()}
-            tags={post.data.tags}
-            description={post.data.description}
-          />
-        ))
-      }
+      <slot />
     </div>
     <div class="right">
       <h4>By category:</h4>
@@ -48,4 +55,4 @@ const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
       </ul>
     </div>
   </div>
-</TwoColumn>
+</BaseLayout>

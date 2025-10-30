@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { pubDate } = Astro.props;
+console.log(typeof pubDate);
 const formattedDate = new Date(pubDate).toLocaleDateString("en-GB", {
   year: "numeric",
   month: "long",
@@ -13,5 +14,6 @@ const date = new Date(pubDate).toLocaleDateString("en-GB");
 ---
 
 <p>
-  <strong>Last updated:</strong> <time datetime={date}>{formattedDate}</time>
+  <strong>Last updated:</strong>
+  <time datetime={date}>{formattedDate}</time>
 </p>
