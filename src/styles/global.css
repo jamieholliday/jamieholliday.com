@@ -37,7 +37,15 @@
 
   --breakpoint-tablet: 768px;
 
-  color-scheme: light dark;
+  /* color-scheme: light dark; */
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
 }
 
 /* 1. Use a more-intuitive box-sizing model */

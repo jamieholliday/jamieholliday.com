@@ -14,17 +14,14 @@ import { Font } from "astro:assets";
     <title>{pageTitle}</title>
     <Font cssVariable="--font-silkscreen" preload />
     <script is:inline>
-      const storedTheme = window.sessionStorage.getItem("theme");
-      if (storedTheme === "dark") {
-        document.documentElement.style.colorScheme = "dark";
-      } else if (storedTheme === "light") {
-        document.documentElement.style.colorScheme = "light";
-      } else if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        document.documentElement.style.colorScheme = "dark";
-      }
+      // set this as early as possible to prevent FOUC
+      const stored = localStorage.getItem("theme");
+      const theme =
+        stored ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
+      document.documentElement.setAttribute("data-theme", theme);
     </script>
   </head>
   <body>

@@ -1,1 +1,0 @@
-self.__BUILD_MANIFEST = (function(a){return {"/":[a],"/bucket-list":[a],"/index":[a]}}("static\u002Fchunks\u002Fe19aabfa77cbafad6d69ac89c9445d6204e6091e.3765be714953b39dd00c.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

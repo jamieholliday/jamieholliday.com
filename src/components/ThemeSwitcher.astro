@@ -47,15 +47,6 @@ import MoonIcon from "./MoonIcon.astro";
     }
   }
 
-  .theme-switcher {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .theme-switcher.ready {
-    opacity: 1;
-  }
-
   .icon {
     position: absolute;
     pointer-events: none;
@@ -99,41 +90,16 @@ import MoonIcon from "./MoonIcon.astro";
   const toggle = document.getElementById(
     "theme-toggle",
   ) as HTMLInputElement | null;
-  const themeSwitcher = document.querySelector(".theme-switcher");
 
-  if (toggle && themeSwitcher) {
-    const storedTheme = window.sessionStorage.getItem("theme");
-    if (storedTheme === "dark") {
-      toggle.checked = true;
-      document.documentElement.style.colorScheme = "dark";
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else if (storedTheme === "light") {
-      toggle.checked = false;
-      document.documentElement.style.colorScheme = "light";
-      document.documentElement.setAttribute("data-theme", "light");
-    } else if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      toggle.checked = true;
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
-
-    themeSwitcher.classList.add("ready");
+  if (toggle) {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    toggle.checked = currentTheme === "dark";
 
     toggle.addEventListener("change", (event: Event) => {
       const isChecked = (event.target as HTMLInputElement).checked;
-      if (isChecked) {
-        document.documentElement.style.colorScheme = "dark";
-        document.documentElement.setAttribute("data-theme", "dark");
-        window.sessionStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.style.colorScheme = "light";
-        document.documentElement.setAttribute("data-theme", "light");
-        window.sessionStorage.setItem("theme", "light");
-      }
+      const theme = isChecked ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
     });
   }
 </script>
